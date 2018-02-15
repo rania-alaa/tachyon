@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        </title>
+    </head>
+    <body>
+       
+        <table>
+            <tbody>
+                    <form class="navbar-form navbar-left pull-right" method="get" action="{% url 'search' %}">
+                            <div class="input-group">
+                              <input id="search" type="text" class="form-control" placeholder="Search" name="search">
+                              <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                  <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </form>
+                <tr>
+                    <td>
+                        <img src="/media/{{user.picture}}" width="200" style="display : inline-block">
+                    </td>
+                    <td>
+                        <h1 style="display : inline-block">{{user.name}}</h1>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <table border="solid">
+        {% for book in books%}
+            <tr>
+                <td>
+                    <img src="/media/{{book.picture}}" width="100" height="100">
+                </td>
+                <td>
+                    <h1>{{book.name}}</h1>
+                </td>
+                <td>
+                    <h4>{{book.status}}</h4>
+                </td>
+                <td>
+                    <h4>
+                        {{book.rate}}
+                    </h4>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </table>
+   
+    </body>
+
+</html>
