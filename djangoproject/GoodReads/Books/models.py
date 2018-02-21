@@ -11,6 +11,11 @@ class author(models.Model):
     nationality = models.CharField(max_length=50)
     gender = models.CharField(max_length=10)
     picture = models.ImageField(upload_to="authors", null=True, blank=True)
+    is_followed=models.BooleanField(default=False)
+
+
+    def __str__(self):
+        return self.name
 
 class books(models.Model):
     users = models.ManyToManyField('Profile', through='book_user')
@@ -20,11 +25,20 @@ class books(models.Model):
     type = models.CharField(max_length=100)
     picture = models.ImageField(upload_to="books", null=True, blank=True)
     summary = models.CharField(max_length=500)
+    is_favorite=models.BooleanField(default=False)
+
+
+    def __str__(self):
+        return self.name
 
 class category(models.Model):
     Books = models.ManyToManyField('books')
 
     type = models.CharField(max_length=100)
+
+
+    def __str__(self):
+        return self.type
 
 class book_user(models.Model):
     Book = models.ForeignKey(books, on_delete=models.CASCADE)
@@ -33,3 +47,6 @@ class book_user(models.Model):
     review = models.CharField(max_length=500)
     rate = models.CharField(max_length=500)
     status = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.user

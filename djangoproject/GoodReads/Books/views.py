@@ -1,8 +1,10 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render,get_object_or_404,redirect ,redirect
 from Books.models import *
 
-
+def index(request):
+    #return HttpResponse("<h1> this is Books HomePage")
+    return render(request, 'index.html' ,{})
 
 def users(request):
     user = Profile.objects.get(user=request.user.id)
@@ -24,3 +26,32 @@ def search(request):
         books_list = books.objects.filter(name__icontains=searchText)
         authors_list = author.objects.filter(name__icontains=searchText)
         return render(request,'search.html',{'books_list':books_list,'authors_list':authors_list})
+
+def allauthors(request):
+    all_authors=author.objects.all();
+    return render(request,'allauthor.html',{'all_authors': all_authors ,})
+
+
+def authordetail(request,author_id):
+    bookss=books.objects.filter(author_id=author_id)
+    authorr=get_object_or_404(author,pk=author_id)
+    return render(request,'authordetails.html',{'author': authorr ,'bookss':bookss})
+
+
+
+def favorite(request,author_id):
+    authorr=get_object_or_404(author,pk=author_id)
+    bookss=books.objects.filter(author_id=author_id)
+    try:
+        selected_book=books.objects.get(pk=request.POST['bookk'])
+    except (KeyError,books.DoesNotExist):
+        return render(request,'authordetails.html',{'author': authorr ,'bookss':bookss ,'error_message':"You did not select a valid book",})
+    else:
+        selected_book.is_favorite = True
+        selected_book.save()
+        return render(request,'authordetails.html',{'author': authorr,'bookss':bookss ,})
+
+
+def allbooks(request):
+    all_books=books.objects.all();
+    return render(request,'allbooks.html',{'all_books': all_books ,})

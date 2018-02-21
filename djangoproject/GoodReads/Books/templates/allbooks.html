@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} All books {% endblock %}
+{% block body %}
+	{% if all_books %}
+		<h3>All books List:</h3>
+
+		<ul>
+			{% for book in all_books  %}
+			<div id="bookpic">
+			<li>
+				<img  src="/media/{{book.picture}}">
+				<!-- <a href="/Books/{{ book.id }}/">{{ book.name }}  </a> -->
+				<a href="#">{{ book.name }}  </a>
+				<br><br><br><br><br><br>
+			</li>
+			</div>
+			{% endfor  %}
+		</ul>
+	{% else %}
+		<h3>you don't have any authors yet ...</h3>
+	{% endif %}
+{% endblock%}

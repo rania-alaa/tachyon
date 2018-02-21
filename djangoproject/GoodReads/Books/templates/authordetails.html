@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} Author Details {% endblock %}
+
+	{% block body %}
+	<div>
+		<h2>Author Name: {{author.name}}</h2>
+	</div>
+	<div id="authorpic">
+		<img src="/media/{{author.picture}}">
+	</div>
+	<div id="startdiv"> 
+		<button  class="button" id='start' width='120' height = '120'>
+			{% if author.is_followed %}
+				followed
+			{% else %}
+				follow
+			{% endif %}
+		</button>
+	</div>
+	{% if error_message %}
+		<p><strong>{{error_message}}</strong></p>
+	{% endif %}
+	<div id=booklist>
+		<h3>All Author Books:</h3>
+		<form action="{% url 'Books:favorite' author.id %}" method="post">
+			{% csrf_token %}
+			{% for book in bookss %}
+				<input type="radio"  id="book{{ forloop.counter }}" name="bookk" value="{{book.id}}">
+				<label for="book{{ forloop.counter }}">
+					{{book.name}}
+					{% if book.is_favorite %}
+						<img src="/media/star" width='18' height = '18'/>
+					{% endif %}
+				</label><br>
+			{% endfor %}
+			<input class="button" id="favorite" type="submit" value="favorite" name="" >
+		</form>
+			<h5>{{ author.is_followed }}</h5>
+	
+<script src="{% static 'js/author.js'%}"></script>
+{% endblock %}
+</body>

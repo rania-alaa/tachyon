@@ -1,0 +1,72 @@
+
+#logo {
+    position: fixed;
+    top: -15%;
+}
+
+a {
+    text-decoration: none;
+}
+.button {
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  width: 150px;
+  cursor: pointer;
+  outline: none;
+  color: #FFD700;
+  background-color: #4682B4; 
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 5px #999; /*shadow color*/
+}
+.button:hover {background-color: #396a93}
+
+.button:active {
+  background-color:	#FFD700; 
+  color: #4682B4;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+#startdiv {
+    height: 200px;
+    width: 400px;
+    position: fixed;
+    top: 65%;
+    right: -10%;   
+}
+#authorpic img {
+    position: /*fixed ;*/ absolute;
+    top: 25%;
+    right: 5%;
+    width: 230px;
+    height: 230px;
+    border-radius: 5%;
+}
+#booklist  {
+    position: fixed ; /*absolute;*/
+    top: 30%;
+    right: 82%;
+    width: 200px;
+    height: 200px;
+}
+#favorite  {
+    position: fixed ; /*absolute;*/
+    top: 65%;
+    right: 88%;
+    width: 135px;
+    height: 75px;
+}
+
+.navbar-brand{
+  font-family: 'Satisfy', cursive; 
+
+}
+#bookpic img {
+    position: absolute;
+    /*top: 25%;*/
+    right: 5%;
+    width: 180px;
+    height: 100px;
+    border-radius: 5%;
+}
