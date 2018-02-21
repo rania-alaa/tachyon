@@ -1,2 +1,3 @@
 # tachyon
-book store application project 
+book store application project (GoodReads).
+
