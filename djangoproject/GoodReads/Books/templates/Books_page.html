@@ -28,9 +28,11 @@
 
 </div>
 <div class="Author" >Author:<a href="/Books/{{authors.id}}">{{selectedBook.author_id}}</a></div>
-<div class="category" >Category:<a href="#">{{selectedBook.type}}"</a></div>
+{% for cat in bookCategory %}
+<div class="category" >Category:<a href="/Books/Books/category/{{cat.id}}">{{cat}}</a></div>
 
 </div>
+{% endfor %}
 <div class="dropdown">
 <button onclick="DropdownClick()" class="dropbtn">Want to Read</button>
 <div id="DropDownContent">
@@ -64,7 +66,7 @@
   </form>
 
 </div>
-<script src="{% static 'js/Droplist.js' %}"></script>
+<script src="{% static "/js/Droplist.js" %}"></script>
 {% endblock %}
 
 

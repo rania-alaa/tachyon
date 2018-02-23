@@ -67,5 +67,16 @@ def allbooks(request):
 def book(request,number):
 	selectedBook=books.objects.get(id=number)
 	authors=author.objects.get(name=selectedBook.author_id)
-	return render(request,'Books_page.html',{'selectedBook':selectedBook,'authors':authors},)
-
+	bookCategory=selectedBook.category_set.all()
+	return render(request,'Books_page.html',{'selectedBook':selectedBook,'authors':authors,'bookCategory':bookCategory},)
+def categories(request,categoryId):
+	selectedBook=books.objects.all()
+	selectedCategory=[]
+	categoryName=""
+	for book in selectedBook:
+		for cat in book.category_set.all():
+			if cat.id==int(categoryId):
+				categoryName=cat
+				selectedCategory.append(book)
+	return render(request,'category.html',{'selectedCategory':selectedCategory,'categoryName':categoryName},)
+	

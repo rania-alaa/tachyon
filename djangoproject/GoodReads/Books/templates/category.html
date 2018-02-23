@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block body %}
+<h3>All Books in {{categoryName}} category are:</h3>
+{% for book in selectedCategory %} 
+<li>{{book}}</li>
+<img src="/media/{{book.picture}}"></img>
+{% endfor %}
+
+{% endblock %}
