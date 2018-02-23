@@ -1,11 +1,20 @@
 from django.http import HttpResponse
 from django.shortcuts import render,get_object_or_404,redirect ,redirect
 from Books.models import *
+from Books.forms import LoginForm
 
 def index(request):
     #return HttpResponse("<h1> this is Books HomePage")
     return render(request, 'index.html' ,{})
-
+def login(request):
+	username=""
+	if request.method=="POST":
+		MyLoginForm=LoginForm(request.POST)
+		if MyLoginForm.is_valid():
+			username=MyLoginForm.cleaned_data['username'];
+	else:
+		MyLoginForm=Loginform()
+	return render(request,'startUpPage.html',{"username: ",username})
 def users(request):
     user = Profile.objects.get(user=request.user.id)
     user.name = request.user.first_name + " " + request.user.last_name
@@ -55,3 +64,8 @@ def favorite(request,author_id):
 def allbooks(request):
     all_books=books.objects.all();
     return render(request,'allbooks.html',{'all_books': all_books ,})
+def book(request,number):
+	selectedBook=books.objects.get(id=number)
+	authors=author.objects.get(name=selectedBook.author_id)
+	return render(request,'Books_page.html',{'selectedBook':selectedBook,'authors':authors},)
+

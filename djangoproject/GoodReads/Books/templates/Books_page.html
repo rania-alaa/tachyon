@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/////font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{% static "/css/Books_page.css" %}">
+{% block body%}
+<div class="book">
+
+
+
+
+<span><img src="/media/{{selectedBook.picture}}" class="bookimg"></img></span>
+
+
+<span>Summary:{{selectedBook.summary}}<span>
+
+</div>
+<div>
+
+
+</div>
+<div class="Author" >Author:<a href="/Books/{{authors.id}}">{{selectedBook.author_id}}</a></div>
+<div class="category" >Category:<a href="#">{{selectedBook.type}}"</a></div>
+
+</div>
+<div class="stars">
+  <form action="">
+
+    <input class="star star-5" id="star-5" type="radio" name="star"/>
+
+    <label class="star star-5" for="star-5"></label>
+
+    <input class="star star-4" id="star-4" type="radio" name="star"/>
+
+    <label class="star star-4" for="star-4"></label>
+
+    <input class="star star-3" id="star-3" type="radio" name="star"/>
+
+    <label class="star star-3" for="star-3"></label>
+
+    <input class="star star-2" id="star-2" type="radio" name="star"/>
+    <label class="star star-2" for="star-2"></label>
+
+    <input class="star star-1" id="star-1" type="radio" name="star"/>
+
+    <label class="star star-1" for="star-1"></label>
+
+  </form>
+
+</div>
+{% endblock %}
+
+
