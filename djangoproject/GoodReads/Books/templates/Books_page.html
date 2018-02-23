@@ -5,14 +5,18 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/////font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="{% static "/css/Books_page.css" %}">
+
+
+
 {% block body%}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/////font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{% static "/css/Books_page.css" %}"/>
+  <link rel="stylesheet" href="{% static "/css/Droplist.css" %}"/>
 <div class="book">
 
 
 
-
+<div>{{selectedBook.name}}</div>
 <span><img src="/media/{{selectedBook.picture}}" class="bookimg"></img></span>
 
 
@@ -26,6 +30,14 @@
 <div class="Author" >Author:<a href="/Books/{{authors.id}}">{{selectedBook.author_id}}</a></div>
 <div class="category" >Category:<a href="#">{{selectedBook.type}}"</a></div>
 
+</div>
+<div class="dropdown">
+<button onclick="DropdownClick()" class="dropbtn">Want to Read</button>
+<div id="DropDownContent">
+<a href="#">Read</a>
+<a href="#">Currently Read</a>
+<a href="#">Want to Read</a>
+</div>
 </div>
 <div class="stars">
   <form action="">
@@ -52,6 +64,7 @@
   </form>
 
 </div>
+<script src="{% static 'js/Droplist.js' %}"></script>
 {% endblock %}
 
 
