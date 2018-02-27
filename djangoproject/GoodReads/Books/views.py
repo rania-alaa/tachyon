@@ -5,16 +5,26 @@ from Books.forms import LoginForm
 
 def index(request):
     #return HttpResponse("<h1> this is Books HomePage")
-    return render(request, 'index.html' ,{})
-def login(request):
+    return render(request, 'startUpPage.html' ,{})
+
+def login(request,user_id):
 	username=""
 	if request.method=="POST":
 		MyLoginForm=LoginForm(request.POST)
-		if MyLoginForm.is_valid():
-			username=MyLoginForm.cleaned_data['username'];
-	else:
-		MyLoginForm=Loginform()
-	return render(request,'startUpPage.html',{"username: ",username})
+		username=request.POST.get('username')
+		password=request.POST.get('password')
+		
+	users=User.objects.filter()
+	
+	for user in users:
+		
+		if user.username==username and user.check_password(password):
+			
+			return render(request,'users.html',{"user":user,"books":{}})	
+	return render(request,'startUpPage.html',{})	
+	
+
+	
 def users(request):
     user = Profile.objects.get(user=request.user.id)
     user.name = request.user.first_name + " " + request.user.last_name

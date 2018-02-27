@@ -1,0 +1,19 @@
+
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block body %} 
+<center>
+<form method="POST" action="{% url 'Books:myurl' user_id %}">
+{% csrf_token %}
+User name: <input type="text" name="username"></br></br>
+Password: <input type="password" name="password"></br>
+
+<div><span>
+
+<button type="button">Sign Up</button></span>
+<span><button type="submit" value="Login"> Login</button></span>
+</div>
+</form>
+</center>
+{% endblock %}
+
