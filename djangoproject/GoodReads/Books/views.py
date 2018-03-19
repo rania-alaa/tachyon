@@ -74,7 +74,36 @@ def favorite(request,author_id):
 def allbooks(request):
     all_books=books.objects.all();
     return render(request,'allbooks.html',{'all_books': all_books ,})
-def book(request,number):
+def book(request,number,user_id):
+	selectedBook=books.objects.get(id=number)
+	users=book_user.objects.filter(user=user_id , Book=number)
+	if users.count()==0:
+		bookName=books.objects.get(id=number)
+		userName=Profile.objects.get(user=user_id)
+		user=book_user.objects.create(Book=bookName,user=userName,rate='0',status='Want to Read')
+		
+		users=book_user.objects.filter(user=user_id , Book=number)
+		
+	else:
+		if request.method=="POST":
+			for user in users:
+				if request.POST.get('star'):
+					user.rate=int(request.POST.get('star'))
+				if request.POST.get('dropbtn'):
+					user.status=request.POST.get('dropbtn')
+				user.save()
+				
+	
+	rate=[]
+	status=[]
+	for user in users:
+		rate.append(int(user.rate))
+		status.append(user.status)
+	authors=author.objects.get(name=selectedBook.author_id)
+	bookCategory=selectedBook.category_set.all()
+	
+	return render(request,'Books_page.html',{'selectedBook':selectedBook,'authors':authors,'bookCategory':bookCategory,'user_rate':rate,'user_status':status},)
+def publicBook(request,number):
 	selectedBook=books.objects.get(id=number)
 	authors=author.objects.get(name=selectedBook.author_id)
 	bookCategory=selectedBook.category_set.all()

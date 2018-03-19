@@ -3,10 +3,11 @@
 
 
 {% block body %}
+<link rel="stylesheet" href="{% static "/css/catimg.css" %}"/>
 <h3>All Books in {{categoryName}} category are:</h3>
 {% for book in selectedCategory %} 
 <li>{{book}}</li>
-<img src="/media/{{book.picture}}"></img>
+<img src="/media/{{book.picture}}" id="book_img_cat"></img>
 {% endfor %}
 
 {% endblock %}

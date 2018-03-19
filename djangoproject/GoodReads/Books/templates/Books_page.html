@@ -1,24 +1,14 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-
-
-
-
-
-
-
-
 {% block body%}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/////font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{% static "/css/Books_page.css" %}"/>
   <link rel="stylesheet" href="{% static "/css/Droplist.css" %}"/>
 <div class="book">
 
-
-
 <div>{{selectedBook.name}}</div>
-<span><img src="/media/{{selectedBook.picture}}" class="bookimg"></img></span>
 
+<span><img src="/media/{{selectedBook.picture}}" class="bookimg"></img></span>
 
 <span>Summary:{{selectedBook.summary}}<span>
 
@@ -28,40 +18,148 @@
 
 </div>
 <div class="Author" >Author:<a href="/Books/{{authors.id}}">{{selectedBook.author_id}}</a></div>
+<p>Category:</p>
 {% for cat in bookCategory %}
-<div class="category" >Category:<a href="/Books/Books/category/{{cat.id}}">{{cat}}</a></div>
+<div class="category" ><a href="/Books/Books/category/{{cat.id}}">{{cat}}</a></div>
 
 </div>
 {% endfor %}
 <div class="dropdown">
-<button onclick="DropdownClick()" class="dropbtn">Want to Read</button>
-<div id="DropDownContent">
-<a href="#">Read</a>
-<a href="#">Currently Read</a>
-<a href="#">Want to Read</a>
-</div>
-</div>
-<div class="stars">
-  <form action="">
 
-    <input class="star star-5" id="star-5" type="radio" name="star"/>
+
+{% if user_status.0 %}
+<button class="dropbtn" >{{user_status.0}}</button>
+{% else %}
+<button class="dropbtn" >Want to Read</button>
+{% endif %}
+<div id="DropDownContent">
+<form method="POST"> {% csrf_token %}
+
+<input type="submit" value="Read" name="dropbtn" class="btn"/>
+<input type="submit" value="Currently Read" name="dropbtn" class="btn"/>
+<input type="submit" value="Want to Read" name="dropbtn" class="btn"/>
+</form>
+</div>
+</div>
+
+<div class="stars">
+  <form id="stars_form" action="" method="POST"> {% csrf_token %}
+
+{% if user_rate.0 == 5 %}
+<input onchange='this.form.submit();' class="star star-5" id="star-5" value="5" type="radio" name="star" checked/>
 
     <label class="star star-5" for="star-5"></label>
 
-    <input class="star star-4" id="star-4" type="radio" name="star"/>
+    <input onchange='this.form.submit();' class="star star-4" id="star-4" value="4" type="radio" name="star" />
 
     <label class="star star-4" for="star-4"></label>
 
-    <input class="star star-3" id="star-3" type="radio" name="star"/>
+    <input onchange='this.form.submit();' class="star star-3" id="star-3" value="3" type="radio" name="star" />
+
+    <labe class="star star-3" for="star-3"></label>
+
+    <input onchange='this.form.submit();' class="star star-2" id="star-2" value="2" type="radio" name="star"  />
+    <label class="star star-2" for="star-2"></label>
+
+    <input onchange='this.form.submit();' class="star star-1" id="star-1" value="1" type="radio" name="star"/>
+
+    <label class="star star-1" for="star-1"></label>
+{% elif user_rate.0 == 4 %}
+<input onchange='this.form.submit();' class="star star-5" id="star-5" value="5" type="radio" name="star"  />
+
+    <label class="star star-5" for="star-5"></label>
+
+<input onchange='this.form.submit();' class="star star-4" id="star-4" value="4" type="radio" name="star" checked/>
+
+    <label class="star star-4" for="star-4"></label>
+
+    <input onchange='this.form.submit();' class="star star-3" id="star-3" value="3" type="radio" name="star" />
 
     <label class="star star-3" for="star-3"></label>
 
-    <input class="star star-2" id="star-2" type="radio" name="star"/>
+    <input onchange='this.form.submit();' class="star star-2" id="star-2" value="2" type="radio" name="star"  />
     <label class="star star-2" for="star-2"></label>
 
-    <input class="star star-1" id="star-1" type="radio" name="star"/>
+    <input onchange='this.form.submit();' class="star star-1" id="star-1" value="1" type="radio" name="star" />
 
     <label class="star star-1" for="star-1"></label>
+{% elif user_rate.0 == 3 %}
+<input onchange='this.form.submit();' class="star star-5" id="star-5" value="5" type="radio" name="star"  />
+
+    <label class="star star-5" for="star-5"></label>
+<input onchange='this.form.submit();' class="star star-4" id="star-4" value="4" type="radio" name="star" />
+
+    <label class="star star-4" for="star-4"></label>
+
+    <input onchange='this.form.submit();' class="star star-3" id="star-3" value="3" type="radio" name="star" checked />
+
+    <label class="star star-3" for="star-3"></label>
+
+    <input onchange='this.form.submit();' class="star star-2" id="star-2" value="2" type="radio" name="star"  />
+    <label class="star star-2" for="star-2"></label>
+
+    <input onchange='this.form.submit();' class="star star-1" id="star-1" value="1" type="radio" name="star"/>
+
+    <label class="star star-1" for="star-1"></label>
+{% elif user_rate.0 == 2 %}
+<input onchange='this.form.submit();' class="star star-5" id="star-5" value="5" type="radio" name="star"  />
+
+    <label class="star star-5" for="star-5"></label>
+<input onchange='this.form.submit();' class="star star-4" id="star-4" value="4" type="radio" name="star" />
+
+    <label class="star star-4" for="star-4"></label>
+
+    <input onchange='this.form.submit();' class="star star-3" id="star-3" value="3" type="radio" name="star" />
+
+    <label class="star star-3" for="star-3"></label>
+
+    <input onchange='this.form.submit();' class="star star-2" id="star-2" value="2" type="radio" name="star" checked />
+    <label class="star star-2" for="star-2"></label>
+
+    <input onchange='this.form.submit();' class="star star-1" id="star-1" value="1" type="radio" name="star" />
+
+    <label class="star star-1" for="star-1"></label>
+{% elif user_rate.0 == 1 %}
+<input onchange='this.form.submit();' class="star star-5" id="star-5" value="5" type="radio" name="star"  />
+
+    <label class="star star-5" for="star-5"></label>
+<input onchange='this.form.submit();' class="star star-4" id="star-4" value="4" type="radio" name="star" />
+
+    <label class="star star-4" for="star-4"></label>
+
+    <input onchange='this.form.submit();' class="star star-3" id="star-3" value="3" type="radio" name="star" />
+
+    <label class="star star-3" for="star-3"></label>
+
+    <input onchange='this.form.submit();' class="star star-2" id="star-2" value="2" type="radio" name="star"  />
+    <label class="star star-2" for="star-2"></label>
+
+    <input onchange='this.form.submit();' class="star star-1" id="star-1" value="1" type="radio" name="star" checked/>
+
+    <label class="star star-1" for="star-1"></label>
+
+
+{% else %}
+   <input onchange='this.form.submit();' class="star star-5" id="star-5" value="5" type="radio" name="star" />
+
+    <label class="star star-5" for="star-5"></label>
+    <input onchange='this.form.submit();' class="star star-4" id="star-4" value="4" type="radio" name="star" />
+
+    <label class="star star-4" for="star-4"></label>
+
+    <input onchange='this.form.submit();' class="star star-3" id="star-3" value="3" type="radio" name="star" />
+
+    <label class="star star-3" for="star-3"></label>
+
+    <input onchange='this.form.submit();' class="star star-2" id="star-2" value="2" type="radio" name="star"  />
+    <label class="star star-2" for="star-2"></label>
+
+    <input onchange='this.form.submit();' class="star star-1" id="star-1" value="1" type="radio" name="star" />
+
+    <label class="star star-1" for="star-1"></label>
+    
+{% endif %}	
+ 
 
   </form>
 
