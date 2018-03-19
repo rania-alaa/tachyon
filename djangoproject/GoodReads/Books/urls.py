@@ -7,7 +7,7 @@ from . import views
 app_name ='Books'
 
 urlpatterns = [
-    path("users/", views.users),
+     url(r'^users/(?P<user_id>[0-9]+)/$', views.users),
     re_path('^search/$',views.search,name='search'),
     path('Books/Author/', views.allauthors, name='allauthors'),
     path('Books/Books/', views.allbooks, name='allbooks'),

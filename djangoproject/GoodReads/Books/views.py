@@ -25,10 +25,10 @@ def login(request,user_id):
 	
 
 	
-def users(request):
-    user = Profile.objects.get(user=request.user.id)
-    user.name = request.user.first_name + " " + request.user.last_name
-    booksReview = book_user.objects.filter(user=request.user.id)
+def users(request,user_id):
+    # user = Profile.objects.get(user=request.user.id)
+    user = Profile.objects.get(pk=user_id)
+    booksReview = book_user.objects.filter(pk=user_id)
     books = [book.Book for book in booksReview]
 
     for i in range(len(books)):

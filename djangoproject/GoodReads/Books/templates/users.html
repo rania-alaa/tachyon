@@ -3,7 +3,7 @@
 {% block body %}
                         <img src="/media/{{user.picture}}" width="200" style="display : inline-block">
   
-                        <h1 style="display : inline-block">{{user.username}}</h1>
+                        <h1 style="display : inline-block">{{user}}</h1>
 
         <br>
         <br>
@@ -20,7 +20,7 @@
                     <h4>{{book.status}}</h4>
                 </td>
                 <td>
-                    <h4>
+                    <h4 width="30">
                         {{book.rate}}
                     </h4>
                 </td>
